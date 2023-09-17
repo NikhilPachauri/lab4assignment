@@ -22,7 +22,7 @@ namespace lab4assignment
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Balance cannot be negative.");
+                    Console.WriteLine("Balance cannot be negative.");
                 }
                 _balance = value;
             }
@@ -32,7 +32,7 @@ namespace lab4assignment
         {
             if (amount < 0)
             {
-                throw new ArgumentException("Deposit amount cannot be negative.");
+                Console.WriteLine("Deposit amount cannot be negative.");
             }
             Balance += amount;
         }
@@ -41,11 +41,11 @@ namespace lab4assignment
         {
             if (amount < 0)
             {
-                throw new ArgumentException("Withdrawal amount cannot be negative.");
+                Console.WriteLine("Withdrawal amount cannot be negative.");
             }
             if (Balance < amount)
             {
-                throw new InvalidOperationException("Insufficient funds for withdrawal.");
+                Console.WriteLine("Insufficient funds for withdrawal.");
             }
             Balance -= amount;
         }
@@ -55,30 +55,6 @@ namespace lab4assignment
             return $"Account Balance: ${Balance:F2}";
         }
 
-        public static void Main()
-        {
-            BankAccount account = new BankAccount(1000);
-            Console.WriteLine(account);  // Output: Account Balance: $1000.00
-
-            account.Deposit(500);
-            Console.WriteLine(account);  // Output: Account Balance: $1500.00
-
-            account.Withdraw(200);
-            Console.WriteLine(account);  // Output: Account Balance: $1300.00
-
-            account.Balance = 2000;
-            Console.WriteLine(account);  // Output: Account Balance: $2000.00
-
-            try
-            {
-                account.Balance = -100;  // Throws ArgumentException: Balance cannot be negative.
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            Console.Readline();
-        }
     }
     public class Car
     {
@@ -95,7 +71,7 @@ namespace lab4assignment
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Balance cannot be negative.");
+                    Console.WriteLine("Balance cannot be negative.");
                 }
                 _balance = value;
             }
@@ -130,7 +106,7 @@ namespace lab4assignment
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Balance cannot be negative.");
+                    Console.WriteLine("Balance cannot be negative.");
                 }
                 _balance = value;
             }
@@ -156,7 +132,7 @@ namespace lab4assignment
             {
                 if (value < -273.15)
                 {
-                    throw new ArgumentException("Temperature in Celsius cannot be below absolute zero.");
+                    Console.WriteLine("Temperature in Celsius cannot be below absolute zero.");
                 }
                 _celsius = value;
             }
@@ -178,7 +154,7 @@ namespace lab4assignment
         {
             if (capacity <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity must be greater than zero.");
+                Console.WriteLine(nameof(capacity), "Capacity must be greater than zero.");
             }
 
             items = new T[capacity];
@@ -196,7 +172,7 @@ namespace lab4assignment
             {
                 if (index < 0 || index >= count)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+                    Console.WriteLine(nameof(index), "Index is out of range.");
                 }
                 return items[index];
             }
@@ -204,7 +180,7 @@ namespace lab4assignment
             {
                 if (index < 0 || index >= count)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+                    Console.WriteLine(nameof(index), "Index is out of range.");
                 }
                 items[index] = value;
             }
@@ -225,7 +201,7 @@ namespace lab4assignment
         {
             if (index < 0 || index >= count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+                Console.WriteLine(nameof(index), "Index is out of range.");
             }
 
             // Shift elements to the left to remove the item at the specified index.
@@ -251,7 +227,7 @@ namespace lab4assignment
         {
             if (capacity <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity must be greater than zero.");
+                Console.WriteLine(nameof(capacity), "Capacity must be greater than zero.");
             }
 
             stack = new T[capacity];
@@ -264,7 +240,7 @@ namespace lab4assignment
             {
                 if (index < 0 || index > top)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+                    Console.WriteLine(nameof(index), "Index is out of range.");
                 }
                 return stack[index];
             }
@@ -286,7 +262,7 @@ namespace lab4assignment
         {
             if (top == -1)
             {
-                throw new InvalidOperationException("Stack is empty.");
+                Console.WriteLine("Stack is empty.");
             }
 
             T poppedItem = stack[top];
@@ -316,14 +292,14 @@ namespace lab4assignment
                 }
                 else
                 {
-                    throw new ArgumentException($"Book with title '{title}' not found on the bookshelf.");
+                    Console.WriteLine($"Book with title '{title}' not found on the bookshelf.");
                 }
             }
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException(nameof(value), "Book cannot be null.");
+                    Console.WriteLine(nameof(value), "Book cannot be null.");
                 }
 
                 // If the book already exists in the dictionary, update it; otherwise, add a new book.
@@ -335,7 +311,7 @@ namespace lab4assignment
         {
             if (book == null)
             {
-                throw new ArgumentNullException(nameof(book), "Book cannot be null.");
+                Console.WriteLine(nameof(book), "Book cannot be null.");
             }
 
             // Add the book to the dictionary by its title.
@@ -350,57 +326,11 @@ namespace lab4assignment
             }
             else
             {
-                throw new ArgumentException($"Book with title '{title}' not found on the bookshelf.");
+                Console.WriteLine($"Book with title '{title}' not found on the bookshelf.");
             }
         }
     }
 
-}
-
-using System;
-
-public enum ShapeType
-{
-    Circle,
-    Square,
-    Triangle
-}
-
-public class Geometry
-{
-    public static double CalculateArea(ShapeType shape, double[] parameters)
-    {
-        switch (shape)
-        {
-            case ShapeType.Circle:
-                if (parameters.Length != 1)
-                {
-                    throw new ArgumentException("A circle requires one parameter: radius.");
-                }
-                double radius = parameters[0];
-                return Math.PI * Math.Pow(radius, 2);
-
-            case ShapeType.Square:
-                if (parameters.Length != 1)
-                {
-                    throw new ArgumentException("A square requires one parameter: side length.");
-                }
-                double sideLength = parameters[0];
-                return Math.Pow(sideLength, 2);
-
-            case ShapeType.Triangle:
-                if (parameters.Length != 2)
-                {
-                    throw new ArgumentException("A triangle requires two parameters: base and height.");
-                }
-                double triangleBase = parameters[0];
-                double height = parameters[1];
-                return 0.5 * triangleBase * height;
-
-            default:
-                throw new ArgumentException("Invalid shape type.");
-        }
-    }
     public enum ShapeType
     {
         Circle,
@@ -417,7 +347,7 @@ public class Geometry
                 case ShapeType.Circle:
                     if (parameters.Length != 1)
                     {
-                        throw new ArgumentException("A circle requires one parameter: radius.");
+                        Console.WriteLine("A circle requires one parameter: radius.");
                     }
                     double radius = parameters[0];
                     return Math.PI * Math.Pow(radius, 2);
@@ -425,7 +355,7 @@ public class Geometry
                 case ShapeType.Square:
                     if (parameters.Length != 1)
                     {
-                        throw new ArgumentException("A square requires one parameter: side length.");
+                        Console.WriteLine("A square requires one parameter: side length.");
                     }
                     double sideLength = parameters[0];
                     return Math.Pow(sideLength, 2);
@@ -433,69 +363,73 @@ public class Geometry
                 case ShapeType.Triangle:
                     if (parameters.Length != 2)
                     {
-                        throw new ArgumentException("A triangle requires two parameters: base and height.");
+                        Console.WriteLine("A triangle requires two parameters: base and height.");
                     }
                     double triangleBase = parameters[0];
                     double height = parameters[1];
                     return 0.5 * triangleBase * height;
 
                 default:
-                    throw new ArgumentException("Invalid shape type.");
+                    Console.WriteLine("Invalid shape type.");
             }
         }
+    }
+
+    public enum Season
+    {
+        Spring,
+        Summer,
+        Autumn,
+        Winter
     }
 
 }
 
 
+
+
+
 class Program
 {
-    void q2call()
+    public void q1call()
+    {
+        BankAccount account = new BankAccount(1000);
+        Console.WriteLine(account);  // Output: Account Balance: $1000.00
+
+        account.Deposit(500);
+        Console.WriteLine(account);  // Output: Account Balance: $1500.00
+
+        account.Withdraw(200);
+        Console.WriteLine(account);  // Output: Account Balance: $1300.00
+
+        account.Balance = 2000;
+        Console.WriteLine(account);  // Output: Account Balance: $2000.00
+    }
+    public void q2call()
     {
         Car car1 = new Car("Toyota", "Camry", 2022);
         car1.Balance = 5000; // Setting a positive balance
         Console.WriteLine(car1.FullCarName); // Output: Toyota Camry 2022
 
-        try
-        {
-            car1.Balance = -1000; // Attempt to set a negative balance (will throw an ArgumentException)
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-        }
+
     }
-    void q3call()
+    public void q3call()
     {
         Person person1 = new Person("John", "Doe");
         person1.Balance = 1000; // Setting a positive balance
         Console.WriteLine(person1.FullName); // Output: JOHN DOE
 
-        try
-        {
-            person1.Balance = -500; // Attempt to set a negative balance (will throw an ArgumentException)
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-        }
+
     }
-    void q4call()
+    public void q4call()
     {
         Temperature temp1 = new Temperature(25.0);
         Console.WriteLine($"Celsius: {temp1.Celsius}°C");       // Output: Celsius: 25°C
         Console.WriteLine($"Fahrenheit: {temp1.Fahrenheit}°F"); // Output: Fahrenheit: 77°F
 
-        try
-        {
-            Temperature temp2 = new Temperature(-300.0); // Attempt to set a temperature below absolute zero (will throw an ArgumentException)
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-        }
+
     }
-    void q5call()
+    public void q5call()
     {
         CustomList<int> myList = new CustomList<int>(3);
 
@@ -514,7 +448,7 @@ class Program
         Console.WriteLine(myList[0]); // Output: 25
         Console.WriteLine(myList.Count); // Output: 2
     }
-    void q6call()
+    public void q6call()
     {
         SimpleStack<int> stack = new SimpleStack<int>(3);
 
@@ -532,7 +466,7 @@ class Program
         Console.WriteLine(stack.Count); // Output: 2
 
     }
-    void q7call()
+    public void q7call()
     {
         var shelf = new Bookshelf();
 
@@ -545,36 +479,74 @@ class Program
         Console.WriteLine(shelf["Book 1"].Author); // Output: Author 1
         Console.WriteLine(shelf["Book 2"].Year);   // Output: 2021
 
-        try
-        {
-            Console.WriteLine(shelf["Book 3"]); // Attempt to access a non-existent book (will throw an ArgumentException)
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-        }
-    }
-    void q8call()
-    {
 
     }
-    void q9call()
+    public void q8call()
+    {
+        Season currentSeason = Season.Summer;
+
+        switch (currentSeason)
+        {
+            case Season.Spring:
+                Console.WriteLine("It's spring! Flowers are blooming.");
+                break;
+            case Season.Summer:
+                Console.WriteLine("It's summer! Enjoy the warm weather.");
+                break;
+            case Season.Autumn:
+                Console.WriteLine("It's autumn! Leaves are falling.");
+                break;
+            case Season.Winter:
+                Console.WriteLine("It's winter! Time to bundle up.");
+                break;
+            default:
+                Console.WriteLine("Invalid season.");
+                break;
+        }
+    }
+    public void q9call()
     {
         double[] circleParams = { 5.0 };
         double[] squareParams = { 4.0 };
         double[] triangleParams = { 3.0, 6.0 };
-
         double circleArea = Geometry.CalculateArea(ShapeType.Circle, circleParams);
         double squareArea = Geometry.CalculateArea(ShapeType.Square, squareParams);
         double triangleArea = Geometry.CalculateArea(ShapeType.Triangle, triangleParams);
-
         Console.WriteLine($"Circle Area: {circleArea}");
         Console.WriteLine($"Square Area: {squareArea}");
         Console.WriteLine($"Triangle Area: {triangleArea}");
+
     }
-    static void Main()
+    public void q10call()
     {
+        FileAccessPermission userPermissions = FileAccessPermission.Read | FileAccessPermission.Write;
+        if ((userPermissions & FileAccessPermission.Read) == FileAccessPermission.Read)
+        {
+            Console.WriteLine("User has Read permission.");
+        }
+        if ((userPermissions & FileAccessPermission.Write) == FileAccessPermission.Write)
+        {
+            Console.WriteLine("User has Write permission.");
+        }
+
+        if ((userPermissions & FileAccessPermission.Execute) == FileAccessPermission.Execute)
+        {
+            Console.WriteLine("User has Execute permission.");
+        }
+    }
+    public static void Main()
+    {
+        Program obj= new Program();
+        obj.q1call();
+        obj.q2call();
+        obj.q3call();
+        obj.q4call();
+        obj.q5call();
+        obj.q6call();
+        obj.q7call();
+        obj.q8call();
+        obj.q9call();
+        obj.q10call();
         
     }
-
 }
