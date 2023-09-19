@@ -483,8 +483,38 @@ class Program
     }
     public void q8call()
     {
-        Season currentSeason = Season.Summer;
+        FileAccessPermission userPermissions = FileAccessPermission.Read | FileAccessPermission.Write;
+        if ((userPermissions & FileAccessPermission.Read) == FileAccessPermission.Read)
+        {
+            Console.WriteLine("User has Read permission.");
+        }
+        if ((userPermissions & FileAccessPermission.Write) == FileAccessPermission.Write)
+        {
+            Console.WriteLine("User has Write permission.");
+        }
 
+        if ((userPermissions & FileAccessPermission.Execute) == FileAccessPermission.Execute)
+        {
+            Console.WriteLine("User has Execute permission.");
+        }
+        
+    }
+    public void q9call()
+    {
+        double[] circleParams = { 5.0 };
+        double[] squareParams = { 4.0 };
+        double[] triangleParams = { 3.0, 6.0 };
+        double circleArea = Geometry.CalculateArea(ShapeType.Circle, circleParams);
+        double squareArea = Geometry.CalculateArea(ShapeType.Square, squareParams);
+        double triangleArea = Geometry.CalculateArea(ShapeType.Triangle, triangleParams);
+        Console.WriteLine($"Circle Area: {circleArea}");
+        Console.WriteLine($"Square Area: {squareArea}");
+        Console.WriteLine($"Triangle Area: {triangleArea}");
+
+    }
+    public void q10call()
+    {
+        Season currentSeason = Season.Summer;
         switch (currentSeason)
         {
             case Season.Spring:
@@ -502,36 +532,6 @@ class Program
             default:
                 Console.WriteLine("Invalid season.");
                 break;
-        }
-    }
-    public void q9call()
-    {
-        double[] circleParams = { 5.0 };
-        double[] squareParams = { 4.0 };
-        double[] triangleParams = { 3.0, 6.0 };
-        double circleArea = Geometry.CalculateArea(ShapeType.Circle, circleParams);
-        double squareArea = Geometry.CalculateArea(ShapeType.Square, squareParams);
-        double triangleArea = Geometry.CalculateArea(ShapeType.Triangle, triangleParams);
-        Console.WriteLine($"Circle Area: {circleArea}");
-        Console.WriteLine($"Square Area: {squareArea}");
-        Console.WriteLine($"Triangle Area: {triangleArea}");
-
-    }
-    public void q10call()
-    {
-        FileAccessPermission userPermissions = FileAccessPermission.Read | FileAccessPermission.Write;
-        if ((userPermissions & FileAccessPermission.Read) == FileAccessPermission.Read)
-        {
-            Console.WriteLine("User has Read permission.");
-        }
-        if ((userPermissions & FileAccessPermission.Write) == FileAccessPermission.Write)
-        {
-            Console.WriteLine("User has Write permission.");
-        }
-
-        if ((userPermissions & FileAccessPermission.Execute) == FileAccessPermission.Execute)
-        {
-            Console.WriteLine("User has Execute permission.");
         }
     }
     public static void Main()
